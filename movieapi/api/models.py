@@ -13,4 +13,15 @@ class Movie(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '%s %s %s %s %d' % (self.title, self.director, self.runningtime, self.description, self.quantity)
+        # return '%s %s %s %s %d' % (self.title, self.director, self.runningtime, self.description, self.quantity)
+        return self.title
+        
+class Order(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.CharField(max_length=40)
+    address = models.CharField(max_length=100)
+    card = models.IntegerField()
+    movies = models.ManyToManyField(Movie)
+
+    def __str__(self):
+        return self.name
