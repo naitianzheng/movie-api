@@ -14,14 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from rest_framework import routers
 from django.contrib import admin
-from api.resources import MovieResource, OrderResource
+from api import views
 
-movie_resource = MovieResource()
-order_resource = OrderResource()
+router = routers.DefaultRouter()
+router.register(r'movie', views.MovieViewSet)
+router.register(r'order', views.OrderViewSet)
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(movie_resource.urls)),
-    url(r'^api/', include(order_resource.urls)),
+    url('', include(router.urls))
 ]
